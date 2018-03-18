@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ExceptionReport
 {
@@ -50,6 +51,7 @@ class ExceptionReport
         return [
             AuthenticationException::class => ['未授权', 401],
             ModelNotFoundException::class => ['该模型未找到', 404],
+            ValidationException::class => [],
         ];
     }
 
@@ -70,7 +72,6 @@ class ExceptionReport
         }
 
         return false;
-
     }
 
     /**
@@ -87,6 +88,10 @@ class ExceptionReport
      */
     public function report()
     {
+        if ($this->exception instanceof ValidationException) {
+            return $this->failed($this->exception->errors());
+        }
+
         $message = $this->doReport()[$this->report];
 
         return $this->failed($message[0], $message[1]);

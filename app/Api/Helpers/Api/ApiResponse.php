@@ -17,6 +17,7 @@ trait ApiResponse
      * @var int
      */
     protected $statusCode = FoundationResponse::HTTP_OK;
+    protected $errorCode = 0;
 
     /**
      * @return mixed
@@ -27,12 +28,30 @@ trait ApiResponse
     }
 
     /**
+     * @return int
+     */
+    public function getErrorCode()
+    {
+        return $this->errorCode;
+    }
+
+    /**
      * @param $statusCode
      * @return $this
      */
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
+        return $this;
+    }
+
+    /**
+     * @param $errorCode
+     * @return $this
+     */
+    public function setErrorCode($errorCode)
+    {
+        $this->errorCode = $errorCode;
         return $this;
     }
 
@@ -54,14 +73,14 @@ trait ApiResponse
      */
     public function status($status, array $data, $code = null)
     {
-        if ($code) {
-            $this->setStatusCode($code);
-        }
+        $code && $this->setStatusCode($code);
 
         $status = [
             'status' => $status,
             'code' => $this->statusCode
         ];
+
+        $this->errorCode && $status['error_code'] = $this->errorCode;
 
         $data = array_merge($status, $data);
         return $this->respond($data);
@@ -70,23 +89,13 @@ trait ApiResponse
     /**
      * @param $message
      * @param int $code
-     * @param int $error_code
+     * @param int $errorCode
      * @param string $status
      * @return mixed
      */
-    public function failed($message, $code = FoundationResponse::HTTP_BAD_REQUEST, $error_code = 0, $status = 'error')
+    public function failed($message, $code = FoundationResponse::HTTP_BAD_REQUEST, $errorCode = 0, $status = 'error')
     {
-        $this->setStatusCode($code);
-        if ($error_code) {
-            return $this->respond([
-                'status' => $status,
-                'code' => $code,
-                'error_code' => $error_code,
-                'message' => $message
-            ]);
-        }
-
-        return $this->message($message, $status);
+        return $this->setStatusCode($code)->setErrorCode($errorCode)->message($message, $status);
     }
 
     /**
