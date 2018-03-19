@@ -56,7 +56,7 @@ class Handler extends ExceptionHandler
             return $this->failed($exception->getMessage(), $exception->getCode(), $exception->getErrorCode());
         }
 
-        // 将方法拦截到自己的ExceptionReport
+        // 将异常拦截到自己的ExceptionReport
         $reporter = ExceptionReport::make($exception);
         if ($reporter->shouldReturn()) {
             return $reporter->report();
