@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,6 +11,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::namespace('Api')->group(function () {
+    // 用户注册
+    Route::post('/register', 'TokenController@register')->name('tokens.register');
+    // 用户登录
+    Route::post('/login', 'TokenController@login')->name('tokens.login');
+    // 刷新token
+    Route::post('/refresh', 'TokenController@refresh')->name('tokens.refresh');
+
+    // 获取自己的资料
+    Route::get('/users/self', 'UserController@self')->name('users.self');
 });

@@ -8,6 +8,7 @@
 
 namespace App\Api\Helpers\Api;
 
+use App\Exceptions\BaseException;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -52,6 +53,7 @@ class ExceptionReport
             AuthenticationException::class => ['未授权', 401],
             ModelNotFoundException::class => ['该模型未找到', 404],
             ValidationException::class => [],
+            BaseException::class => [],
         ];
     }
 
@@ -88,12 +90,15 @@ class ExceptionReport
      */
     public function report()
     {
+        if ($this->exception instanceof BaseException) {
+            return $this->failed($this->exception->getMessage(), $this->exception->getCode(), $this->exception->getErrorCode());
+        }
+
         if ($this->exception instanceof ValidationException) {
             return $this->failed($this->exception->errors());
         }
 
         $message = $this->doReport()[$this->report];
-
         return $this->failed($message[0], $message[1]);
     }
 }

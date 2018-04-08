@@ -12,6 +12,6 @@ namespace App\Exceptions;
 class ForbiddenException extends BaseException
 {
     public $message = '权限不足';
-    public $code = 403;
     public $error_code = 10003;
+    public $code = 403;
 }

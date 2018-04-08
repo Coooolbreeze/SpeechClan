@@ -12,6 +12,6 @@ namespace App\Exceptions;
 class TokenException extends BaseException
 {
     public $message = 'Token不存在或已过期';
-    public $code = 401;
     public $error_code = 10001;
+    public $code = 401;
 }

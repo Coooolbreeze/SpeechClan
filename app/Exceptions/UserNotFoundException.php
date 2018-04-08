@@ -12,6 +12,6 @@ namespace App\Exceptions;
 class UserNotFoundException extends BaseException
 {
     public $message = '该用户不存在';
-    public $code = 404;
     public $error_code = 20000;
+    public $code = 404;
 }

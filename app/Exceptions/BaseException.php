@@ -16,11 +16,11 @@ class BaseException extends Exception
     protected $code = 400;
     protected $error_code = 999;
 
-    public function __construct(string $message = "", int $code = 0, int $error_code = 0)
+    public function __construct(string $message = "", int $error_code = 0, int $code = 0)
     {
         $message && $this->message = $message;
-        $code && $this->code = $code;
         $error_code && $this->error_code = $error_code;
+        $code && $this->code = $code;
     }
 
     public final function getErrorCode()

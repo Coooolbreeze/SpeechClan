@@ -12,6 +12,6 @@ namespace App\Exceptions;
 class PasswordErrorException extends BaseException
 {
     public $message = '密码错误';
-    public $code = 401;
     public $error_code = 20001;
+    public $code = 403;
 }

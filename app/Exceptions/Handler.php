@@ -51,11 +51,6 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // 如果是自定义异常
-        if ($exception instanceof BaseException) {
-            return $this->failed($exception->getMessage(), $exception->getCode(), $exception->getErrorCode());
-        }
-
         // 将异常拦截到自己的ExceptionReport
         $reporter = ExceptionReport::make($exception);
         if ($reporter->shouldReturn()) {
