@@ -12,3 +12,4 @@
 */
 
 Route::redirect('/', '/home', 301);
+Route::redirect('/admin', '/admin', 301);
