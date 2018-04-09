@@ -130,6 +130,24 @@ trait ApiResponse
     }
 
     /**
+     * @param string $message
+     * @return mixed
+     */
+    public function updated($message = "updated")
+    {
+        return $this->message($message);
+    }
+
+    /**
+     * @param string $message
+     * @return mixed
+     */
+    public function deleted($message = "deleted")
+    {
+        return $this->message($message);
+    }
+
+    /**
      * @param $data
      * @param string $status
      * @return mixed

@@ -1,0 +1,56 @@
+<div class="layui-main">
+    <form class="layui-form layui-form-pane" action="javascript:;">
+        <!-- <div class="layui-form-item">
+            <label class="layui-form-label">Banner图</label>
+            <div class="layui-upload">
+                <div class="layui-upload-list" style="margin-top:0" id="upImg">
+                    <img src="./imgs/upload.png" class="layui-upload-img upload-img" id="preImg">
+                    <p id="upText"></p>
+                </div>
+            </div>
+        </div> -->
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">内容</label>
+            <div class="layui-input-block">
+                <textarea class="layui-textarea layui-hide" name="content" id="content"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <button class="layui-btn" lay-submit="" lay-filter="sure">提交</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    var base = window.base;
+    base.getLocalStorage('token') || (window.location.href = 'login.html');
+
+    layui.use(['element', 'layer', 'form', 'layedit', 'upload'], function () {
+        var element = layui.element,
+            layer = layui.layer,
+            form = layui.form,
+            layedit = layui.layedit,
+            upload = layui.upload;
+
+        // layedit.set({
+        //     uploadImage: {
+        //         url: window.base.g_restUrl + '/upload?token=' + token
+        //     }
+        // });
+
+        var editIndex;
+        // if (id) {
+        //     paddingData(function () {
+        //         editIndex = layedit.build('content', {
+        //             height: 700
+        //         });
+        //     });
+        // } else {
+        editIndex = layedit.build('content', {
+            height: 700
+        });
+        // }
+    });
+</script>
