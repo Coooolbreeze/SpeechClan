@@ -16,7 +16,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('video_id');
-            $table->string('title')->default('默认标题');
+            $table->string('title')->default('默认');
             $table->tinyInteger('sort')->default(0);
             $table->timestamps();
         });

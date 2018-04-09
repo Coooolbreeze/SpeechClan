@@ -22,6 +22,7 @@ class ClubResource extends JsonResource
             'depict' => $this->depict,
             'detail' => $this->detail,
             'redirect_uri' => $this->redirect_uri,
+            'sort' => $this->sort,
             'created_at' => (string)$this->created_at,
         ];
     }

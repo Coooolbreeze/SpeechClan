@@ -17,7 +17,10 @@ class StudentResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'title' => $this->title,
             'video' => new VideoResource(Video::findOrFail($this->video_id)),
+            'sort' => $this->sort,
+            'created_at' => $this->created_at,
         ];
     }
 }

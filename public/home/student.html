@@ -38,7 +38,8 @@
             },
             cols: [[
                 { field: 'id', title: 'ID', align: 'center' },
-                { field: 'title', title: '标题', align: 'center' },
+                { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
+                { field: 'title', title: '名称（点击修改）', align: 'center', edit: 'text' },
                 { field: 'video', title: '视频', align: 'center', event: 'preVideo', templet: '<div>点击预览</div>' },
                 { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
             ]],
