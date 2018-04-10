@@ -19,7 +19,8 @@ window.base = {
             },
             error: function (err) {
                 if (err.status == 401) {
-                    this.deleteLocalStorage('token');
+                    that.deleteLocalStorage('token');
+                    that.deleteLocalStorage('refresh_token');
                     window.location.href = 'login.html';
                 } else {
                     console.log(err);
@@ -65,7 +66,7 @@ window.base = {
     loadLocalHtml: function (url, element) {
         $.ajax({
             url: url,
-            type: 'get',
+            type: 'GET',
             success: function (res) {
                 $(element).html(res);
             },

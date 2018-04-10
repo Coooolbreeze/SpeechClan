@@ -46,7 +46,7 @@
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">描述</label>
+            <label class="layui-form-label">副标题</label>
             <div class="layui-input-block">
                 <input id="depict" type="text" name="depict" autocomplete="off" class="layui-input">
             </div>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="layui-form-item layui-form-text">
-            <label class="layui-form-label">详情</label>
+            <label class="layui-form-label">介绍</label>
             <div class="layui-input-block">
                 <textarea id="detail" class="layui-textarea"></textarea>
             </div>
@@ -174,13 +174,13 @@
                 error('标题长度为3~20', '#title');
             }
             if (!regexp.check('[3,20]', data.depict)) {
-                error('描述长度为3~20', '#depict');
+                error('副标题长度为3~20', '#depict');
             }
             if (!regexp.check('url', data.redirect_uri)) {
                 error('请输入正确的跳转链接', '#redirectUri');
             }
             if (!regexp.check('[10,200]', data.detail)) {
-                error('详情长度为10~200', '#detail');
+                error('介绍长度为10~200', '#detail');
             }
         }
 

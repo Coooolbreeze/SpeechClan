@@ -1,15 +1,5 @@
 <div class="layui-main">
     <form class="layui-form layui-form-pane" action="javascript:;">
-        <!-- <div class="layui-form-item">
-            <label class="layui-form-label">Banner图</label>
-            <div class="layui-upload">
-                <div class="layui-upload-list" style="margin-top:0" id="upImg">
-                    <img src="./imgs/upload.png" class="layui-upload-img upload-img" id="preImg">
-                    <p id="upText"></p>
-                </div>
-            </div>
-        </div> -->
-
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
@@ -34,23 +24,50 @@
             layedit = layui.layedit,
             upload = layui.upload;
 
-        // layedit.set({
-        //     uploadImage: {
-        //         url: window.base.g_restUrl + '/upload?token=' + token
-        //     }
-        // });
-
-        var editIndex;
-        // if (id) {
-        //     paddingData(function () {
-        //         editIndex = layedit.build('content', {
-        //             height: 700
-        //         });
-        //     });
-        // } else {
-        editIndex = layedit.build('content', {
-            height: 700
+        layedit.set({
+            uploadImage: {
+                url: base.g_restUrl + '/images?token=' + base.getLocalStorage('token')
+            }
         });
-        // }
+        
+        var editIndex;
+        show(function (res) {
+            $('#content').html(res.content);
+            editIndex = layedit.build('content', {
+                height: 700
+            });
+        });
+
+        form.on('submit(sure)', function () {
+            update(layedit.getContent(editIndex), function (res) {
+                layer.msg('编辑成功');
+            });
+        });
+
+        function show(callback) {
+            var params = {
+                url: '/about_us/1',
+                type: 'GET',
+                success: function (res) {
+                    callback && callback(res.data);
+                }
+            }
+            base.getData(params);
+        }
+
+        function update(content, callback) {
+            var params = {
+                url: '/about_us/1',
+                type: 'PUT',
+                tokenFlag: true,
+                data: {
+                    content: content
+                },
+                success: function (res) {
+                    callback && callback(res.message);
+                }
+            }
+            base.getData(params);
+        }
     });
 </script>

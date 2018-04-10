@@ -72,6 +72,15 @@
             }
         });
 
+        table.on('edit(demo)', function (obj) {
+            update(obj.data.id, {
+                [obj.field]: obj.value
+            }, function (res) {
+                base.loadLocalHtml('student.html', '.layui-body');
+                layer.msg('修改成功');
+            });
+        });
+
         upload.render({
             elem: '#add',
             url: window.base.g_restUrl + '/videos',
@@ -115,6 +124,19 @@
                 url: '/students/' + id,
                 type: 'DELETE',
                 tokenFlag: true,
+                success: function (res) {
+                    callback && callback(res.message);
+                }
+            }
+            base.getData(params);
+        }
+
+        function update(id, data, callback) {
+            var params = {
+                url: '/students/' + id,
+                type: 'PUT',
+                tokenFlag: true,
+                data: data,
                 success: function (res) {
                     callback && callback(res.message);
                 }

@@ -38,10 +38,10 @@
             cols: [[
                 { field: 'id', title: 'ID', align: 'center' },
                 { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
-                { field: 'image', title: '预览图', align: 'center', templet: '<div><img style="width:100%;height:100%" src="{{d.image.url}}" /></div>' },
+                { field: 'image', title: '预览图', align: 'center', event: 'preImage', templet: '<div><img style="width:100%;height:100%" src="{{d.image.url}}" /></div>' },
                 { field: 'title', title: '标题', align: 'center' },
-                { field: 'depict', title: '描述', align: 'center' },
-                { field: 'detail', title: '详情', align: 'center' },
+                { field: 'depict', title: '副标题', align: 'center' },
+                { field: 'detail', title: '介绍', align: 'center' },
                 { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
             ]],
             done: function (res, curr, count) {
@@ -69,7 +69,33 @@
                     });
                     layer.close(index);
                 });
-            };
+            } else if (obj.event === 'preImage') {
+                layer.photos({
+                    photos: {
+                        title: '',
+                        id: 1,
+                        start: 0,
+                        data: [
+                            {
+                                alt: data.title,
+                                pid: 1,
+                                src: data.image.url,
+                                thumb: data.image.url
+                            }
+                        ]
+                    },
+                    anim: 5
+                });
+            }
+        });
+
+        table.on('edit(demo)', function (obj) {
+            update(obj.data.id, {
+                [obj.field]: obj.value
+            }, function (res) {
+                base.loadLocalHtml('club.html', '.layui-body');
+                layer.msg('修改成功');
+            });
         });
 
         $('#add').on('click', function () {
@@ -88,6 +114,19 @@
                 url: '/clubs/' + id,
                 type: 'DELETE',
                 tokenFlag: true,
+                success: function (res) {
+                    callback && callback(res.message);
+                }
+            }
+            base.getData(params);
+        }
+
+        function update(id, data, callback) {
+            var params = {
+                url: '/clubs/' + id,
+                type: 'PUT',
+                tokenFlag: true,
+                data: data,
                 success: function (res) {
                     callback && callback(res.message);
                 }

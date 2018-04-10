@@ -32,6 +32,14 @@ class StudentController extends ApiController
         return $this->created();
     }
 
+    public function update(Request $request, $id)
+    {
+        Student::where('id', $id)
+            ->update($request->post());
+
+        return $this->updated();
+    }
+
     public function destroy($id)
     {
         Student::where('id', $id)

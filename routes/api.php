@@ -23,9 +23,21 @@ Route::namespace('Api')->group(function () {
     // 分帮查询
     Route::apiResource('/clubs', 'ClubController')
         ->only(['index', 'show']);
+    // 课程查询
+    Route::apiResource('/courses', 'CourseController')
+        ->only(['index', 'show']);
     // 学员展示查询
     Route::apiResource('/students', 'StudentController')
         ->only(['index']);
+    // 教学视频展示
+    Route::apiResource('/teaches', 'TeachController')
+        ->only(['index']);
+    // 报名预约
+    Route::apiResource('/orders', 'OrderController')
+        ->only(['store']);
+    // 关于我们展示
+    Route::apiResource('/about_us', 'AboutUsController')
+        ->only(['show']);
 
 
     // 需要超级管理员权限的路由
@@ -37,8 +49,20 @@ Route::namespace('Api')->group(function () {
         // 分帮增删改
         Route::apiResource('/clubs', 'ClubController')
             ->only(['store', 'update', 'destroy']);
-        // 学员展示增删
+        // 课程增删改
+        Route::apiResource('/courses', 'CourseController')
+            ->only(['store', 'update', 'destroy']);
+        // 学员展示增删改
         Route::apiResource('/students', 'StudentController')
-            ->only(['store', 'destroy']);
+            ->only(['store', 'update', 'destroy']);
+        // 教学视频增删改
+        Route::apiResource('/teaches', 'TeachController')
+            ->only(['store', 'update', 'destroy']);
+        // 预约人数查改删
+        Route::apiResource('/orders', 'OrderController')
+            ->only(['index', 'update', 'destroy']);
+        // 关于我们编辑
+        Route::apiResource('/about_us', 'AboutUsController')
+            ->only(['update']);
     });
 });
