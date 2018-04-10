@@ -6,15 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>演讲帮-登录</title>
+    <link href="./css/login.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-    <div>
-        <label for="">用户名：</label>
-        <input type="text" id="username">
-        <label for="">密　码：</label>
-        <input type="password" id="password">
-        <button id="login">登录</button>
+    <div class="login-view">
+        <div class="login-wrapper" ng-controller="loginCtrl">
+            <div class="login-box">
+                <div class="login-title">
+                    <div class="company-name">
+                        <img src="./imgs/logo.png">
+                        <span>演讲帮</span>
+                    </div>
+                    <div class="systme-name">
+                        <span>SpeechClub</span>
+                    </div>
+                </div>
+                <div class="login-form">
+                    <div class="form-group form-input">
+                        <input type="text" class="normal-input" id="username" placeholder="用户名">
+                        <div class="common-error-tips">
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="form-group form-input">
+                        <input type="password" class="normal-input" id="password" placeholder="密码">
+                        <div class="common-error-tips">
+                            <div></div>
+                        </div>
+                    </div>
+                    <div class="form-group form-btn">
+                        <input type="button" class="normal-btn" id="login" value="登录">
+                    </div>
+                    <div class="form-group form-forget">
+                        <label class="error-tips">登录失败</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="./js/jquery-3.3.1.min.js"></script>
