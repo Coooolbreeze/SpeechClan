@@ -18,7 +18,11 @@ class StudentController extends ApiController
 {
     public function index()
     {
-        return new StudentCollection(Student::paginate(Input::get('limit') ?: 10));
+        return new StudentCollection(
+            Student::orderBy('sort')
+                ->latest()
+                ->paginate(Input::get('limit') ?: 10)
+        );
     }
 
     public function store(Request $request)

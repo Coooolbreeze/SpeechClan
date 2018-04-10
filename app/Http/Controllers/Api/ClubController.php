@@ -19,7 +19,11 @@ class ClubController extends ApiController
 {
     public function index()
     {
-        return new ClubCollection(Club::paginate(Input::get('limit') ?: 10));
+        return new ClubCollection(
+            Club::orderBy('sort')
+                ->latest()
+                ->paginate(Input::get('limit') ?: 10)
+        );
     }
 
     public function store(Request $request)

@@ -19,6 +19,7 @@ window.base = {
             },
             error: function (err) {
                 if (err.status == 401) {
+                    this.deleteLocalStorage('token');
                     window.location.href = 'login.html';
                 } else {
                     console.log(err);
