@@ -4399,6 +4399,7 @@ ImageButton = (function(superClass) {
         }
         return $input = $('<input/>', {
           type: 'file',
+          name: 'file',
           title: _this._t('uploadImage'),
           multiple: true,
           accept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg'
@@ -4495,16 +4496,16 @@ ImageButton = (function(superClass) {
           } catch (_error) {
             e = _error;
             result = {
-              success: false
+              code: 400
             };
           }
         }
-        if (result.success === false) {
+        if (result.code != 200) {
           msg = result.msg || _this._t('uploadFailed');
           alert(msg);
           img_path = _this.defaultImage;
         } else {
-          img_path = result.file_path;
+          img_path = result.data.url;
         }
         _this.loadImage($img, img_path, function() {
           var $mask;
@@ -4522,7 +4523,7 @@ ImageButton = (function(superClass) {
         });
         if (_this.popover.active) {
           _this.popover.srcEl.prop('disabled', false);
-          return _this.popover.srcEl.val(result.file_path);
+          return _this.popover.srcEl.val(result.data.url);
         }
       };
     })(this));
@@ -4794,6 +4795,7 @@ ImagePopover = (function(superClass) {
         }
         return _this.input = $('<input/>', {
           type: 'file',
+          name: 'file',
           title: _this._t('uploadImage'),
           multiple: true,
           accept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg'
