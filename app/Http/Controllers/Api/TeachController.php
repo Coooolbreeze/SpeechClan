@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Resources\TeachCollection;
+use App\Http\Resources\TeachResource;
 use App\Models\Teach;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -23,6 +24,11 @@ class TeachController extends ApiController
                 ->latest()
                 ->paginate(Input::get('limit') ?: 10)
         );
+    }
+
+    public function show($id)
+    {
+        return $this->success(new TeachResource(Teach::findOrFail($id)));
     }
 
     public function store(Request $request)

@@ -28,10 +28,10 @@ Route::namespace('Api')->group(function () {
         ->only(['index', 'show']);
     // 学员展示查询
     Route::apiResource('/students', 'StudentController')
-        ->only(['index']);
+        ->only(['index', 'show']);
     // 教学视频展示
     Route::apiResource('/teaches', 'TeachController')
-        ->only(['index']);
+        ->only(['index', 'show']);
     // 报名预约
     Route::apiResource('/orders', 'OrderController')
         ->only(['store']);

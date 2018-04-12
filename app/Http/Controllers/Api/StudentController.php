@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Resources\StudentCollection;
+use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -23,6 +24,11 @@ class StudentController extends ApiController
                 ->latest()
                 ->paginate(Input::get('limit') ?: 10)
         );
+    }
+
+    public function show($id)
+    {
+        return $this->success(new StudentResource(Student::findOrFail($id)));
     }
 
     public function store(Request $request)
