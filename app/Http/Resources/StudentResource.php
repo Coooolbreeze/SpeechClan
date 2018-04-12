@@ -21,7 +21,7 @@ class StudentResource extends JsonResource
             'image' => new ImageResource(Image::findOrFail($this->image_id)),
             'video' => ['url' => $this->video_url],
             'sort' => $this->sort,
-            'created_at' => $this->created_at,
+            'created_at' => (string)$this->created_at,
         ];
     }
 }
