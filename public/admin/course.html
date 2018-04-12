@@ -1,10 +1,10 @@
 <div class="layui-main" style="display:flex;justify-content:flex-start">
-    <div style="display:flex;margin:5px 0 0">
-        <button id="add" class="layui-btn">添加</button>
-    </div>
+  <div style="display:flex;margin:5px 0 0">
+    <button id="add" class="layui-btn">添加</button>
+  </div>
 </div>
 <div class="layui-main">
-    <table id="demo" lay-filter="demo"></table>
+  <table id="demo" lay-filter="demo"></table>
 </div>
 
 <script type="text/html" id="barDemo">
@@ -14,124 +14,124 @@
     </script>
 
 <script>
-    var base = window.base;
-    base.getLocalStorage('token') || (window.location.href = 'login.html');
+  var base = window.base;
+  base.getLocalStorage('token') || (window.location.href = 'login.html');
 
-    layui.use(['table', 'form'], function () {
-        var table = layui.table,
-            form = layui.form;
+  layui.use(['table', 'form'], function () {
+    var table = layui.table,
+      form = layui.form;
 
-        var tableIns = table.render({
-            id: 'idTest',
-            elem: '#demo',
-            page: true,
-            limits: [15, 30, 45, 60],
-            limit: 15,
-            url: base.g_restUrl + '/courses',
-            response: {
-                statusName: 'code',
-                statusCode: 200,
-                msgName: 'status',
-                countName: 'total',
-                dataName: 'data'
-            },
-            cols: [[
-                { field: 'id', title: 'ID', align: 'center' },
-                { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
-                { field: 'image', title: '预览图', align: 'center', event: 'preImage', templet: '<div><img style="width:100%;height:100%" src="{{d.image.url}}" /></div>' },
-                { field: 'title', title: '标题', align: 'center' },
-                { field: 'depict', title: '副标题', align: 'center' },
-                { field: 'detail', title: '介绍', align: 'center' },
-                { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
-            ]],
-            done: function (res, curr, count) {
+    var tableIns = table.render({
+      id: 'idTest',
+      elem: '#demo',
+      page: true,
+      limits: [15, 30, 45, 60],
+      limit: 15,
+      url: base.g_restUrl + '/courses',
+      response: {
+        statusName: 'code',
+        statusCode: 200,
+        msgName: 'status',
+        countName: 'total',
+        dataName: 'data'
+      },
+      cols: [[
+        { field: 'id', title: 'ID', align: 'center' },
+        { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
+        { field: 'image', title: '预览图', align: 'center', event: 'preImage', templet: '<div><img style="width:100%;height:100%" src="{{d.image.url}}" /></div>' },
+        { field: 'title', title: '标题', align: 'center' },
+        { field: 'depict', title: '副标题', align: 'center' },
+        { field: 'detail', title: '介绍', align: 'center' },
+        { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
+      ]],
+      done: function (res, curr, count) {
 
-            }
-        });
-
-        //监听工具条
-        table.on('tool(demo)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'edit') {
-                var index = layer.open({
-                    type: 2,
-                    area: ['70%', '100%'],
-                    fixed: true,
-                    maxmin: true,
-                    content: 'course-edit.html?id=' + data.id
-                });
-                layer.full(index);
-            } else if (obj.event === 'del') {
-                layer.confirm('确定删除该课程？', function (index) {
-                    del(data.id, function (res) {
-                        obj.del();
-                        layer.msg('删除成功');
-                    });
-                    layer.close(index);
-                });
-            } else if (obj.event === 'preImage') {
-                layer.photos({
-                    photos: {
-                        title: '',
-                        id: 1,
-                        start: 0,
-                        data: [
-                            {
-                                alt: data.title,
-                                pid: 1,
-                                src: data.image.url,
-                                thumb: data.image.url
-                            }
-                        ]
-                    },
-                    anim: 5
-                });
-            }
-        });
-
-        table.on('edit(demo)', function (obj) {
-            update(obj.data.id, {
-                [obj.field]: obj.value
-            }, function (res) {
-                base.loadLocalHtml('course.html', '.layui-body');
-                layer.msg('修改成功');
-            });
-        });
-
-        $('#add').on('click', function () {
-            var index = layer.open({
-                type: 2,
-                area: ['70%', '100%'],
-                fixed: true,
-                maxmin: true,
-                content: 'course-edit.html'
-            });
-            layer.full(index);
-        });
-
-        function del(id, callback) {
-            var params = {
-                url: '/courses/' + id,
-                type: 'DELETE',
-                tokenFlag: true,
-                success: function (res) {
-                    callback && callback(res.message);
-                }
-            }
-            base.getData(params);
-        }
-
-        function update(id, data, callback) {
-            var params = {
-                url: '/courses/' + id,
-                type: 'PUT',
-                tokenFlag: true,
-                data: data,
-                success: function (res) {
-                    callback && callback(res.message);
-                }
-            }
-            base.getData(params);
-        }
+      }
     });
+
+    //监听工具条
+    table.on('tool(demo)', function (obj) {
+      var data = obj.data;
+      if (obj.event === 'edit') {
+        var index = layer.open({
+          type: 2,
+          area: ['70%', '100%'],
+          fixed: true,
+          maxmin: true,
+          content: 'course-edit.html?id=' + data.id
+        });
+        layer.full(index);
+      } else if (obj.event === 'del') {
+        layer.confirm('确定删除该课程？', function (index) {
+          del(data.id, function (res) {
+            obj.del();
+            layer.msg('删除成功');
+          });
+          layer.close(index);
+        });
+      } else if (obj.event === 'preImage') {
+        layer.photos({
+          photos: {
+            title: '',
+            id: 1,
+            start: 0,
+            data: [
+              {
+                alt: data.title,
+                pid: 1,
+                src: data.image.url,
+                thumb: data.image.url
+              }
+            ]
+          },
+          anim: 5
+        });
+      }
+    });
+
+    table.on('edit(demo)', function (obj) {
+      update(obj.data.id, {
+        [obj.field]: obj.value
+      }, function (res) {
+        base.loadLocalHtml('course.html', '.layui-body');
+        layer.msg('修改成功');
+      });
+    });
+
+    $('#add').on('click', function () {
+      var index = layer.open({
+        type: 2,
+        area: ['70%', '100%'],
+        fixed: true,
+        maxmin: true,
+        content: 'course-edit.html'
+      });
+      layer.full(index);
+    });
+
+    function del(id, callback) {
+      var params = {
+        url: '/courses/' + id,
+        type: 'DELETE',
+        tokenFlag: true,
+        success: function (res) {
+          callback && callback(res.message);
+        }
+      }
+      base.getData(params);
+    }
+
+    function update(id, data, callback) {
+      var params = {
+        url: '/courses/' + id,
+        type: 'PUT',
+        tokenFlag: true,
+        data: data,
+        success: function (res) {
+          callback && callback(res.message);
+        }
+      }
+      base.getData(params);
+    }
+  });
 </script>

@@ -1,147 +1,162 @@
 <div class="layui-main" style="display:flex;justify-content:flex-start">
-    <div style="display:flex;margin:5px 0 0">
-        <button id="add" class="layui-btn">添加</button>
-    </div>
+  <div style="display:flex;margin:5px 0 0">
+    <button id="add" class="layui-btn">添加</button>
+  </div>
 </div>
 <div class="layui-main">
-    <table id="demo" lay-filter="demo"></table>
+  <table id="demo" lay-filter="demo"></table>
 </div>
 
 <script type="text/html" id="barDemo">
         <!-- <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a> -->
-        <!-- <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">编辑</a> -->
+        <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </script>
 
 <script>
-    var base = window.base;
-    base.getLocalStorage('token') || (window.location.href = 'login.html');
+  var base = window.base;
+  base.getLocalStorage('token') || (window.location.href = 'login.html');
 
-    layui.use(['table', 'form', 'upload'], function () {
-        var table = layui.table,
-            form = layui.form,
-            upload = layui.upload;
+  layui.use(['table', 'form', 'upload'], function () {
+    var table = layui.table,
+      form = layui.form,
+      upload = layui.upload;
 
-        var tableIns = table.render({
-            id: 'idTest',
-            elem: '#demo',
-            page: true,
-            limits: [15, 30, 45, 60],
-            limit: 15,
-            url: base.g_restUrl + '/teaches',
-            response: {
-                statusName: 'code',
-                statusCode: 200,
-                msgName: 'status',
-                countName: 'total',
-                dataName: 'data'
-            },
-            cols: [[
-                { field: 'id', title: 'ID', align: 'center' },
-                { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
-                { field: 'title', title: '名称（点击修改）', align: 'center', edit: 'text' },
-                { field: 'video', title: '视频', align: 'center', event: 'preVideo', templet: '<div>点击预览</div>' },
-                { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
-            ]],
-            done: function (res, curr, count) {
+    var tableIns = table.render({
+      id: 'idTest',
+      elem: '#demo',
+      page: true,
+      limits: [15, 30, 45, 60],
+      limit: 15,
+      url: base.g_restUrl + '/teaches',
+      response: {
+        statusName: 'code',
+        statusCode: 200,
+        msgName: 'status',
+        countName: 'total',
+        dataName: 'data'
+      },
+      cols: [[
+        { field: 'id', title: 'ID', align: 'center' },
+        { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
+        { field: 'title', title: '名称（点击修改）', align: 'center' },
+        { field: 'image', title: '预览图', align: 'center', event: 'preImage', templet: '<div><img style="width:100%;height:100%" src="{{d.image.url}}" /></div>' },
+        { field: 'video', title: '视频', align: 'center', event: 'preVideo', templet: '<div>点击预览</div>' },
+        { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
+      ]],
+      done: function (res, curr, count) {
 
-            }
-        });
-
-        //监听工具条
-        table.on('tool(demo)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'del') {
-                layer.confirm('确定删除该教学视频？', function (index) {
-                    del(data.id, function (res) {
-                        obj.del();
-                        layer.msg('删除成功');
-                    });
-                    layer.close(index);
-                });
-            } else if (obj.event === 'preVideo') {
-                layer.open({
-                    type: 2,
-                    title: false,
-                    area: ['630px', '360px'],
-                    shade: 0.8,
-                    closeBtn: 0,
-                    shadeClose: true,
-                    content: data.video.url
-                });
-            }
-        });
-
-        table.on('edit(demo)', function (obj) {
-            update(obj.data.id, {
-                [obj.field]: obj.value
-            }, function (res) {
-                base.loadLocalHtml('teach.html', '.layui-body');
-                layer.msg('修改成功');
-            });
-        });
-
-        upload.render({
-            elem: '#add',
-            url: window.base.g_restUrl + '/videos',
-            headers: { token: base.getLocalStorage('token') },
-            accept: 'video',
-            before: function (obj) {
-                layer.load();
-            },
-            done: function (res) {
-                layer.closeAll('loading');
-                if (res.code != 200) {
-                    return layer.msg('上传失败');
-                }
-                create(res.data.id, function (res) {
-                    base.loadLocalHtml('teach.html', '.layui-body');
-                });
-            },
-            error: function () {
-                layer.closeAll('loading');
-                layer.msg('上传失败');
-            }
-        });
-
-        function create(videoId, callback) {
-            var params = {
-                url: '/teaches',
-                type: 'POST',
-                tokenFlag: true,
-                data: {
-                    video_id: videoId
-                },
-                success: function (res) {
-                    callback && callback(res.message);
-                }
-            }
-            base.getData(params);
-        }
-
-        function del(id, callback) {
-            var params = {
-                url: '/teaches/' + id,
-                type: 'DELETE',
-                tokenFlag: true,
-                success: function (res) {
-                    callback && callback(res.message);
-                }
-            }
-            base.getData(params);
-        }
-
-        function update(id, data, callback) {
-            var params = {
-                url: '/teaches/' + id,
-                type: 'PUT',
-                tokenFlag: true,
-                data: data,
-                success: function (res) {
-                    callback && callback(res.message);
-                }
-            }
-            base.getData(params);
-        }
+      }
     });
+
+    //监听工具条
+    table.on('tool(demo)', function (obj) {
+      var data = obj.data;
+      if (obj.event === 'del') {
+        layer.confirm('确定删除该教学视频？', function (index) {
+          del(data.id, function (res) {
+            obj.del();
+            layer.msg('删除成功');
+          });
+          layer.close(index);
+        });
+      } else if (obj.event === 'edit') {
+        var index = layer.open({
+          type: 2,
+          area: ['70%', '100%'],
+          fixed: true,
+          maxmin: true,
+          content: 'teach-edit.html?id=' + data.id
+        });
+        layer.full(index);
+      } else if (obj.event === 'preVideo') {
+        layer.open({
+          type: 2,
+          title: false,
+          area: ['630px', '360px'],
+          shade: 0.8,
+          closeBtn: 0,
+          shadeClose: true,
+          content: data.video.url
+        });
+      } else if (obj.event === 'preImage') {
+        layer.photos({
+          photos: {
+            title: '',
+            id: 1,
+            start: 0,
+            data: [
+              {
+                alt: data.title,
+                pid: 1,
+                src: data.image.url,
+                thumb: data.image.url
+              }
+            ]
+          },
+          anim: 5
+        });
+      }
+    });
+
+    table.on('edit(demo)', function (obj) {
+      update(obj.data.id, {
+        [obj.field]: obj.value
+      }, function (res) {
+        base.loadLocalHtml('teach.html', '.layui-body');
+        layer.msg('修改成功');
+      });
+    });
+
+    $('#add').on('click', function () {
+      var index = layer.open({
+        type: 2,
+        area: ['70%', '100%'],
+        fixed: true,
+        maxmin: true,
+        content: 'student-edit.html'
+      });
+      layer.full(index);
+    });
+
+    function create(videoId, callback) {
+      var params = {
+        url: '/teaches',
+        type: 'POST',
+        tokenFlag: true,
+        data: {
+          video_id: videoId
+        },
+        success: function (res) {
+          callback && callback(res.message);
+        }
+      }
+      base.getData(params);
+    }
+
+    function del(id, callback) {
+      var params = {
+        url: '/teaches/' + id,
+        type: 'DELETE',
+        tokenFlag: true,
+        success: function (res) {
+          callback && callback(res.message);
+        }
+      }
+      base.getData(params);
+    }
+
+    function update(id, data, callback) {
+      var params = {
+        url: '/teaches/' + id,
+        type: 'PUT',
+        tokenFlag: true,
+        data: data,
+        success: function (res) {
+          callback && callback(res.message);
+        }
+      }
+      base.getData(params);
+    }
+  });
 </script>
