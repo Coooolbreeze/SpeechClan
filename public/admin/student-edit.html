@@ -173,9 +173,9 @@
       if (!regexp.check('[3,20]', data.title)) {
         error('标题长度为3~20', '#title');
       }
-      if (!regexp.check('url', data.video_url)) {
-        error('请输入正确的视频链接', '#videoUrl');
-      }
+      // if (!regexp.check('url', data.video_url)) {
+      //   error('请输入正确的视频链接', '#videoUrl');
+      // }
     }
 
     function error(text, element) {
