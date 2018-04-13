@@ -1,0 +1,551 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+
+}
+
+.black {
+    color: #000;
+}
+
+.fff {
+    color: #fff;
+}
+
+@font-face {
+    font-family: myFirstFont;
+    src: url('../font/PingFang-SC-Regular.otf')
+}
+
+body {
+    font-family: myFirstFont;
+}
+
+header {
+    font-size: 0.22rem;
+    background: #000;
+    color: #fff;
+    width: 100%;
+    height: 0.915rem;
+    line-height: 0.915rem;
+}
+
+header a {
+    padding-bottom: 0.05rem;
+
+}
+
+header a:hover {
+    color: #fc0;
+    border-bottom: 2px solid #fc0;
+}
+
+.yj {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    display: none;
+}
+
+.yj li {
+    display: block;
+    height: 0.5rem;
+}
+
+header > ul > li:last-child {
+    position: relative;
+}
+
+header > ul > li:last-child:hover .yj {
+    display: block;
+}
+
+.width {
+    width: 10rem;
+    margin: 0 auto;
+}
+
+header > ul > li {
+    display: inline-block;
+}
+
+header > ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.5rem;
+    box-sizing: border-box;
+}
+
+header a {
+    color: #fff;
+}
+
+header img {
+    width: 0.99rem;
+    margin-top: 0.1976rem;
+}
+
+.banner {
+    width: 100%;
+    height: 4.54rem;
+    background: url("../img/indexBanner.jpg") top center/cover;
+}
+
+.banner h3 {
+    font-size: 0.35rem;
+    color: #fff;
+    padding: 1rem 0 0.37rem 0.7rem;
+}
+
+.banner p {
+    font-size: 0.26rem;
+    color: #fff;
+    letter-spacing: 0.2rem;
+    padding-left: 0.7rem;
+}
+
+.indexText {
+    text-align: center;
+    padding: 0.88rem 0 0.44rem;
+}
+
+.indexText h3, .title h3 {
+    font-size: 0.26rem;
+    letter-spacing: 0.05rem;
+}
+
+.indexText p, .title p {
+    font-size: 0.147rem;
+}
+
+.indexText h3:first-of-type {
+    margin-bottom: 0.22rem;
+}
+
+.indexText h3:nth-of-type(2) {
+    margin-top: 0.37rem;
+    margin-bottom: 0.14rem;
+}
+
+.indexText h3:nth-of-type(3) {
+    margin-bottom: 0.14rem;
+}
+
+.indexText h3:nth-of-type(4) {
+    margin-top: 0.37rem;
+    margin-bottom: 1.5rem;
+}
+
+.indexText h3:nth-of-type(5) {
+    margin-bottom: 0.22rem;
+}
+
+.tutor {
+    box-sizing: border-box;
+    padding: 1.83rem 0 0 0.44rem;
+    color: #fff;
+    height: 5.49rem;
+    margin-bottom: 0.88rem;
+    background: url("../img/lecturer.jpg") top right/cover no-repeat;
+}
+
+.tutor h3 {
+    font-size: 0.26rem;
+    width: 5.4rem;
+    margin-bottom: 0.22rem;
+    letter-spacing: 0.03rem;
+    font-weight: 500;
+}
+
+.tutor p {
+    font-size: 0.18rem;
+    width: 5.2rem;
+}
+
+.title {
+    text-align: center;
+}
+
+.title h3 {
+    margin: 0.37rem 0 0.22rem;
+}
+
+.sw-slide {
+    position: relative;
+    width: 10rem;
+    margin: 0 auto;
+}
+
+.sw-slide img:last-of-type {
+    width: 0.8rem;
+    height: 0.8rem;
+    cursor: pointer;
+}
+
+#player_a {
+    width: 100% !important;
+}
+
+#full_feature {
+    height: 6rem;
+    padding-top: 0 !important;
+    width: 100%;
+}
+
+.sw-slide {
+    height: 6.69rem;
+}
+
+.btn {
+    margin: 0.37rem auto 1rem;
+    width: 1.35rem;
+    height: 0.55rem;
+    color: #fff;
+    background: #fc0;
+    border: none;
+    font-size: 0.26rem;
+    display: block;
+    border-radius: 0.1rem;
+    line-height: 0.55rem;
+    cursor: pointer;
+}
+
+.btn a {
+    color: #fff;
+}
+
+.classIntro {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.44rem;
+}
+
+.classIntro div {
+    width: 3.22rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.classIntro h2 {
+    font-size: 0.26rem;
+    margin-bottom: 0.22rem;
+}
+
+.classIntro p {
+    font-size: 0.13rem;
+    margin-bottom: 0.52rem;
+    text-align: justify;
+}
+
+.classIntro a {
+    font-size: 0.18rem;
+    color: #000;
+    position: absolute;
+    bottom: 0.2rem;
+    left: 35%;
+}
+
+.classIntro img {
+    width: 100%;
+}
+
+.intro div {
+    border: 2px solid #eee;
+    padding: 0.4rem 0.1rem 0.2rem;
+}
+
+.foot {
+    background: url("../img/footBanner.jpg") top center/cover no-repeat;
+    height: 3.88rem;
+}
+
+.tel {
+    width: 42%;
+    background: rgba(153, 204, 204, 0.7);
+    height: 3.88rem;
+    text-align: left;
+    float: left;
+}
+
+.tel h3 {
+    font-size: 0.35rem;
+    padding: 0.35rem 0 0.35rem 1.24rem;
+}
+
+.tel h2 {
+    font-size: 0.18rem;
+    padding: 0.05rem 0 0.05rem 1.24rem;
+}
+
+.tel img {
+    margin: 0.05rem 0 0 1.24rem;
+    width: 1.46rem;
+}
+
+#map {
+    width: 58%;
+    height: 3.88rem;
+    float: left;
+}
+
+/*关于我们*/
+.banner2 {
+    background: url("../img/abouUsBanner.jpg") top center/cover;
+}
+
+.banner6 h3,.banner2 h3, .banner3 h3, .banner4 h3, .banner5 h3 {
+    text-align: center;
+    padding: 0 !important;
+}
+
+.banner6 h3:first-of-type,.banner5 h3:first-of-type, .banner2 h3:first-of-type, .banner3 h3:first-of-type, .banner4 h3:first-of-type {
+    padding-top: 1rem !important;
+}
+
+.banner6 p,.banner5 p, .banner2 p, .banner3 p, .banner4 p {
+    letter-spacing: 0.02rem;
+    margin-top: 0.2rem;
+    text-align: center;
+    padding: 0 !important;
+}
+
+.why {
+    margin: 0.3rem auto 0 !important;
+    background: url("../img/aboutImg.jpg") top right/cover no-repeat;
+}
+
+.question {
+    margin-top: 0.3rem;
+}
+
+.question p {
+    width: 8rem;
+    margin: 0 auto;
+    font-size: 0.18rem;
+    text-align: justify;
+}
+
+.question p span {
+    background: #fc0;
+    font-size: 0.2rem;
+}
+
+.aboutIntro div {
+    padding: 0;
+}
+
+.aboutIntro h2 {
+    font-size: 0.22rem;
+    margin-top: 0.37rem;
+}
+
+.aboutIntro p {
+    padding: 0 0.2rem 0;
+    font-size: 0.13rem;
+}
+
+.banner3 {
+    background: url("../img/introBanner.jpg") top center/cover;
+}
+
+.red {
+    color: red;
+}
+
+.newClass {
+    margin-top: 0.3rem;
+    background: url("../img/introImg.jpg") top center/cover;
+
+}
+
+.more {
+    margin-top: 0.5rem;
+}
+
+.introClass p {
+    width: 3rem;
+    margin: 0 auto;
+}
+
+.introClass .intro {
+    padding: 0 1.3rem;
+    box-sizing: border-box;
+}
+
+.introClass .intro p {
+    margin-bottom: 0.52rem;
+}
+
+.form > div {
+    margin-top: 0.25rem;
+}
+
+.form input {
+    height: 0.29rem;
+    width: 4rem;
+    border: 1px solid #000;
+    padding-left: 0.2rem;
+    box-sizing: border-box;
+    font-size: 0.13rem;
+    display: block;
+    margin: 0.25rem auto 0;
+}
+
+.form button {
+    width: 1.54rem;
+    height: 0.29rem;
+    background: #6633cc;
+    font-size: 0.18rem;
+    color: #fff;
+    border: 1px solid #000;
+    margin: 0.3rem auto 1rem;
+}
+
+.banner4 {
+    background: url("../img/studentBanner.jpg") top center/cover;
+}
+.banner6 {
+    background: url("../img/letureBanner.jpg") top center/cover;
+}
+.banner6 h3{
+    width: 5.5rem;
+    text-align: center;
+    margin: 0 auto;
+}
+.style li {
+    width: 4.76rem;
+    height: 2rem;
+    overflow: hidden;
+    position: relative;
+    margin-top: 0.26rem;
+}
+
+.style {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.v > img:last-of-type {
+    width: 0.3rem;
+    height: 0.3rem;
+    position: absolute;
+    top: 40%;
+    left: 47%;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.style > li > img:first-of-type {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: -0.3rem;
+}
+
+.student {
+    margin-top: 0.59rem;
+    margin-bottom: 0!important;
+    background: url("../img/studentFoot.jpg") top center/cover;
+}
+
+.student h3 {
+    width: 4.2rem;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.banner5 {
+    background: url("../img/YJB.jpg") top center/cover;
+}
+
+.fen {
+    background: rgb(240, 241, 241);
+    min-height: 4.25rem;
+    height: auto;
+    margin-top: 0.37rem;
+    overflow: hidden;
+}
+
+.fenBang {
+    margin-top: 0.88rem;
+}
+
+.for {
+    height: inherit;
+}
+
+.for div {
+    float: left;
+}
+
+.for>div:first-of-type {
+    width: 45%;
+    padding: 0.8rem 0.29rem 0.3rem;
+    box-sizing: border-box;
+
+}
+
+.for h2 {
+    font-size: 0.22rem;
+    margin-bottom: 0.2rem;
+    text-align: left;
+}
+
+.for p {
+    text-align: justify !important;
+    font-size: 0.13rem;
+}
+
+.for>div:last-of-type {
+    width: 55%;
+    box-sizing: border-box;
+    padding: 0.3rem;
+    overflow: hidden;
+}
+
+.for .img {
+    width: 100%;
+    height: 3.5rem;
+}
+
+.btnMore {
+    height: 0.34rem;
+    line-height: 0.34rem;
+    font-size: 0.18rem;
+    font-weight: bold;
+    margin: 0.44rem 0 0 0;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10000000;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+}
+
+.modal > video {
+    height: 100vh;
+}
+
+.modal > span {
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    background: #fff;
+    display: block;
+    width: 0.5rem;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    text-align: center;
+    font-size: 0.2rem;
+    border-radius: 0.05rem;
+    z-index: 1000000;
+    cursor: pointer;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>课程介绍</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'/>
+    <link rel="stylesheet" type="text/css" href="css/swipeslider.css">
+    <link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" href="css/css.css"/>
+</head>
+<body>
+<!--导航条-->
+<header>
+    <ul class="width">
+        <li><a href="index.html">首页</a></li>
+        <li><a href="aboutUs.html">关于我们</a></li>
+        <li><a style="color: #fc0;border-bottom:2px solid #fc0" href="introClass.html">课程介绍</a></li>
+        <li><img src="img/yanJiangBang.png" alt=""/></li>
+        <li><a href="lectur.html">导师风采</a></li>
+        <li><a href="student.html">学员风采</a></li>
+        <li>
+            <a href="yjb.html">演讲帮</a>
+            <ul class="yj">
+                <li><a href="">演讲1</a></li>
+                <li><a href="">演讲2</a></li>
+                <li><a href="">演讲3</a></li>
+            </ul>
+        </li>
+    </ul>
+</header>
+<div class="banner banner3">
+    <div class="width">
+        <h3>
+            多元化课程体系
+        </h3>
+
+        <p>立足于演讲与亲子培训教育，让您事业家庭双丰收</p>
+    </div>
+</div>
+<div class="title">
+    <h3>最新课程</h3>
+
+    <p class="red">十年精华班择日开班，名额有限,火速报名</p>
+</div>
+<div class="tutor width newClass">
+    <h3>
+        《心力演说》十年精华班
+    </h3>
+
+    <p>
+        打通心灵的任督二脉，让你在台上自如绽放；塑造你的强大
+        感染力，让全场为你而动。首创演讲培训领域内的私人订制
+        模式，带着你的问题来，我们为你提供最具针对性的演讲训
+        练方案。课程结束后，享有十次演讲实战机会！
+    </p>
+
+    <p class="more">
+        LOAD MORE
+    </p>
+</div>
+<div class="title introClass">
+    <h3>演讲帮课程</h3>
+
+    <p>
+        我们针对不同类型的学员在不同的大环境下 精心准备了可以帮助到他们的精品课程
+    </p>
+
+    <div class="classIntro width intro">
+        <div>
+            <h2>《心力演说》十年精华班 </h2>
+
+            <p>打通心灵的任督二脉，让你在台上自如绽放；塑
+                造你的强大感染力，让全场为你而动。首创演讲
+
+            </p>
+            <a href="">LOAD MORE</a>
+        </div>
+        <div>
+            <h2>《讲台王者》隐学玄机班 </h2>
+
+            <p>为你深度解读演讲力背后的玄机，分享任何其它
+                渠道都见不到的台上隐学。让你随时随地有话讲
+                让你说出见解独到的话，让你的话自带说服力。
+                只有进入演说高手的思维世界，才能让自己一通
+                百通！课程结束后，享有十五次演讲实战的机会！
+            </p>
+            <a href="">LOAD MORE</a>
+        </div>
+    </div>
+</div>
+<div class="title">
+    <h3>报名预约</h3>
+
+    <div class="form">
+        <div>
+            <input type="text" placeholder="姓名" id="name"/>
+            <input type="tel" placeholder="手机号" id="tel"/>
+            <input type="email" placeholder="邮箱" id="email"/>
+        </div>
+        <div>
+            <button class="yu">点击马上预约</button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/index.js"></script>
+<script>
+    $('.yu').click(function(){
+        var name=$('#name').val();
+        var tel=$('#tel').val();
+        var email=$('#email').val();
+        var re = /^1\d{10}$/;
+        if(name==''){
+            alert('请输入姓名')
+        }else if(tel==''){
+            alert('请输入手机号码')
+        }else if(!re.test(tel)){
+            alert('请输入正确手机号码')
+        }else if(email==''){
+            alert('请输入邮箱')
+        }else{
+            $.ajax({
+                url: "http://speech.besthtml5.com/api/orders",
+                type:'POST',
+                data:{
+                    name:name,
+                    phone:tel,
+                    email:email,
+                },
+                success: function(res){
+                   alert('预约成功')
+                }});
+        }
+
+    })
+
+</script>
+</html>
