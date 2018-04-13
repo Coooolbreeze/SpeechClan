@@ -29,7 +29,7 @@ class StoreOrder extends FormRequest
                 'between:2,10',
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/(^[\x{4e00}-\x{9fa5}]{1}[\x{4e00}-\x{9fa5}\.·。]{0,8}[\x{4e00}-\x{9fa5}]{0}$)|(^[a-zA-Z]{1}[a-zA-Z\s]{0,8}[a-zA-Z]{0}$)/u', $value)) {
-                        return $fail($attribute . 'is invalid.');
+                        return $fail($attribute . ' is invalid.');
                     }
                 }
             ],
@@ -39,7 +39,7 @@ class StoreOrder extends FormRequest
                 'unique:orders',
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/^1[3-9]\d{9}$/', $value)) {
-                        return $fail($attribute . 'is invalid.');
+                        return $fail($attribute . ' is invalid.');
                     }
                 }
             ]

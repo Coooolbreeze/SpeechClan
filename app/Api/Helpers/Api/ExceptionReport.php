@@ -62,9 +62,9 @@ class ExceptionReport
      */
     public function shouldReturn()
     {
-        if (!($this->request->wantsJson() || $this->request->ajax())) {
-            return false;
-        }
+//        if (!($this->request->wantsJson() || $this->request->ajax())) {
+//            return false;
+//        }
 
         foreach (array_keys($this->doReport()) as $report) {
             if ($this->exception instanceof $report) {
@@ -82,7 +82,7 @@ class ExceptionReport
      */
     public static function make(Exception $e)
     {
-        return new static(\request(), $e);
+        return new static(request(), $e);
     }
 
     /**
@@ -95,7 +95,7 @@ class ExceptionReport
         }
 
         if ($this->exception instanceof ValidationException) {
-            return $this->failed($this->exception->errors());
+            return $this->failed($this->exception->errors(), 422);
         }
 
         $message = $this->doReport()[$this->report];
