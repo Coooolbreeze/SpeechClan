@@ -120,7 +120,11 @@
 				</div>
 			</div>
 		</a>
-	</body>-->
+	-->
+	<div class="foot_text">
+			皖ICP备18008044号-1     思维万有
+		</div>
+		</body>
 	<script src="js/jquery-1.8.3.min.js"></script>
 	<script src="js/index.js"></script>
 	<script>
@@ -131,7 +135,7 @@
 				console.log(content);
 				var all = '';
 				for(var i = 0; i < content.length; i++) {
-					all += '<div class="title fenBang">\
+					all += '<a name="speech1"><div class="title fenBang">\
                         <h3>' + content[i].title + '</h3>\
                         <p>' + content[i].depict + '</p>\
                 </div>\
@@ -146,7 +150,7 @@
                         <div class="img" style="background: url(' + content[i].image.url + ') top center/cover no-repeat"></div>\
                         </div>\
                         </div>\
-                        </div>'
+                        </div></a>'
 				}
 				console.log(all)
 				$('.content').html(all);
