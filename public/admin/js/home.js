@@ -14,6 +14,10 @@ layui.use(['element', 'layer'], function () {
 
     base.loadLocalHtml('order.html', '.layui-body');
 
+    $('#banner').on('click', function () {
+        base.loadLocalHtml('banner.html', '.layui-body');
+    });
+
     $('#aboutMe').on('click', function () {
         base.loadLocalHtml('about-me.html', '.layui-body');
     });

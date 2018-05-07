@@ -38,6 +38,9 @@ Route::namespace('Api')->group(function () {
     // 关于我们展示
     Route::apiResource('/about_us', 'AboutUsController')
         ->only(['show']);
+    // 首页Banner展示
+    Route::apiResource('/banners', 'BannerController')
+        ->only(['index']);
 
 
     // 需要超级管理员权限的路由
@@ -64,5 +67,8 @@ Route::namespace('Api')->group(function () {
         // 关于我们编辑
         Route::apiResource('/about_us', 'AboutUsController')
             ->only(['update']);
+        // 首页Banner增删
+        Route::apiResource('/banners', 'BannerController')
+            ->only(['store', 'destroy']);
     });
 });
