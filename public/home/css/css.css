@@ -588,3 +588,11 @@ body {
 .xf img{
 	width: 100%;
 }
+@media only screen and (max-width: 414px) {
+	.xf{
+		display: none;
+	}
+}
+.foot_text{
+	font-size: 14px;
+}
