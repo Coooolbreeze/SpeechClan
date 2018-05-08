@@ -49,13 +49,14 @@
 			</ul>
 		</header>
 		<div class="banner banner3">
+			<!--<img src=""/>
 			<div class="width">
 				<h3>
                 多元化课程体系
             </h3>
 
 				<p>立足于演讲与亲子培训教育，让您事业家庭双丰收</p>
-			</div>
+			</div>-->
 		</div>
 		<div class="title">
 			<h3>最新课程</h3>
@@ -166,6 +167,19 @@
 				window.base.getData(params);
 			}
 		});
+		
+		$.ajax({
+			url: "http://www.yanjiangbang.cn/api/banners？type=3",
+			success: function(res) {
+				var banner = res.data;
+				console.log(banner)
+				var html='';
+					for(var i = 0; i < banner.length; i++) {
+						html += '<img src="' +banner[i].image.url+ '"/><div class="width"><h3>帮有志者学会演讲<br>用演讲帮助有心人</h3><p>我们是好有爱的社群演讲帮</p></div>'
+					}
+					$(".banner").html(html);
+			}
+		})
 	</script>
 
 </html>

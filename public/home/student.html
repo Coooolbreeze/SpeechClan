@@ -47,6 +47,7 @@
 			</ul>
 		</header>
 		<div class="banner banner4">
+			<!--<img src=""/>
 			<div class="width">
 				<h3>
             演讲之道、学在乐学
@@ -58,7 +59,7 @@
 		<div class="title">
 			<h3>学员展示</h3>
 
-			<p>近期优秀学员学习课程高清图片展示</p>
+			<p>近期优秀学员学习课程高清图片展示</p>-->
 
 		</div>
 		<div class="width">
@@ -138,6 +139,18 @@
 				})
 			}
 		});
+		$.ajax({
+			url: "http://www.yanjiangbang.cn/api/banners?type=5",
+			success: function(res) {
+				var banner = res.data;
+				console.log(banner)
+				var html='';
+					for(var i = 0; i < banner.length; i++) {
+						html += '<img src="' +banner[i].image.url+ '"/>'
+					}
+					$(".banner4").html(html);
+			}
+		})
 	</script>
 
 </html>

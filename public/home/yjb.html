@@ -156,6 +156,19 @@
 				$('.content').html(all);
 			}
 		});
+		
+		$.ajax({
+			url: "http://www.yanjiangbang.cn/api/banners?type=6",
+			success: function(res) {
+				var banner = res.data;
+				console.log(banner)
+				var html='';
+					for(var i = 0; i < banner.length; i++) {
+						html += '<img src="' +banner[i].image.url+ '"/>'
+					}
+					$(".banner").html(html);
+			}
+		})
 	</script>
 
 </html>
