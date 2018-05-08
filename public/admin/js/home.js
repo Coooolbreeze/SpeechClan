@@ -14,7 +14,33 @@ layui.use(['element', 'layer'], function () {
 
     base.loadLocalHtml('order.html', '.layui-body');
 
-    $('#banner').on('click', function () {
+    $('#homeBanner').on('click', function () {
+        base.bannerType = 1;
+        base.loadLocalHtml('banner.html', '.layui-body');
+    });
+
+    $('#aboutBanner').on('click', function () {
+        base.bannerType = 2;
+        base.loadLocalHtml('banner.html', '.layui-body');
+    });
+
+    $('#coruseBanner').on('click', function () {
+        base.bannerType = 3;
+        base.loadLocalHtml('banner.html', '.layui-body');
+    });
+
+    $('#teachBanner').on('click', function () {
+        base.bannerType = 4;
+        base.loadLocalHtml('banner.html', '.layui-body');
+    });
+
+    $('#studentBanner').on('click', function () {
+        base.bannerType = 5;
+        base.loadLocalHtml('banner.html', '.layui-body');
+    });
+
+    $('#clubBanner').on('click', function () {
+        base.bannerType = 6;
         base.loadLocalHtml('banner.html', '.layui-body');
     });
 

@@ -38,7 +38,7 @@ Route::namespace('Api')->group(function () {
     // 关于我们展示
     Route::apiResource('/about_us', 'AboutUsController')
         ->only(['show']);
-    // 首页Banner展示
+    // Banner展示
     Route::apiResource('/banners', 'BannerController')
         ->only(['index']);
 
@@ -67,8 +67,8 @@ Route::namespace('Api')->group(function () {
         // 关于我们编辑
         Route::apiResource('/about_us', 'AboutUsController')
             ->only(['update']);
-        // 首页Banner增删
+        // Banner增删改
         Route::apiResource('/banners', 'BannerController')
-            ->only(['store', 'destroy']);
+            ->only(['store', 'update', 'destroy']);
     });
 });

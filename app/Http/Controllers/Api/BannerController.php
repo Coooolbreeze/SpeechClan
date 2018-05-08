@@ -11,27 +11,43 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\BannerCollection;
 use App\Models\Banner;
+use App\Services\Tokens\TokenFactory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class BannerController extends ApiController
 {
-    public function index()
+    public function index(Request $request)
     {
-        return new BannerCollection(
-            Banner::orderBy('status')
-                ->latest()
-                ->paginate(Input::get('limit') ?: 10)
-        );
+        $type = $request->get('type') ?: 1;
+        $res = Banner::where(function ($query) use ($type) {
+            $type && $query->where('type', $type);
+        })->where(function ($query) {
+            !$this->isAdmin() && $query->where('publish', 1);
+        })
+            ->orderBy('publish', 'desc')
+            ->orderBy('sort')
+            ->latest()
+            ->paginate(Input::get('limit') ?: 10);
+
+        return new BannerCollection($res);
     }
 
     public function store(Request $request)
     {
         Banner::create([
+            'type' => $request->post('type'),
             'image_id' => $request->post('image_id')
         ]);
 
         return $this->created();
+    }
+
+    public function update(Request $request, $id)
+    {
+        Banner::where('id', $id)->update($request->post());
+
+        return $this->updated();
     }
 
     public function destroy($id)

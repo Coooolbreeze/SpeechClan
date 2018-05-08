@@ -8,10 +8,12 @@
 </div>
 
 <script type="text/html" id="barDemo">
-          <!-- <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="detail">详情</a> -->
-          <!-- <a class="layui-btn layui-btn-warm layui-btn-xs" lay-event="edit">编辑</a> -->
-          <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-  </script>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="publish">
+    <input type="checkbox" value="{{d.id}}" name="{{d.publish}}" lay-skin="switch" lay-text="ON|OFF" lay-filter="publish" {{d.publish && 'checked'}}>
+</script>
 
 <script>
     var base = window.base;
@@ -28,16 +30,13 @@
             headers: { token: base.getLocalStorage('token') },
             before: function (obj) {
                 layer.load();
-                // obj.preview(function (index, file, result) {
-                //     $('#preImg').attr('src', result);
-                // });
             },
             done: function (res) {
                 layer.closeAll('loading');
                 if (res.code != 200) {
                     return layer.msg('上传失败');
                 }
-                create(res.data.id, function(res){
+                create(res.data.id, function (res) {
                     layer.msg('上传成功');
                     tableIns.reload();
                 })
@@ -54,7 +53,8 @@
             page: true,
             limits: [15, 30, 45, 60],
             limit: 15,
-            url: base.g_restUrl + '/banners',
+            url: base.g_restUrl + '/banners?type=' + base.bannerType,
+            headers: { token: base.getLocalStorage('token') },
             response: {
                 statusName: 'code',
                 statusCode: 200,
@@ -63,8 +63,9 @@
                 dataName: 'data'
             },
             cols: [[
-                { field: 'id', title: 'ID', align: 'center' },
+                { field: 'sort', title: '排序（点击修改）', align: 'center', edit: 'text' },
                 { field: 'image', title: '预览图', align: 'center', event: 'preImage', templet: '<div><img style="width:100%;height:100%" src="{{d.image.url}}" /></div>' },
+                { title: '显示', align: 'center', templet: '#publish' },
                 { title: '操作', align: 'center', toolbar: '#barDemo', fixed: 'right' }
             ]],
             done: function (res, curr, count) {
@@ -103,16 +104,20 @@
             }
         });
 
-        // $('#add').on('click', function () {
-        //     var index = layer.open({
-        //         type: 2,
-        //         area: ['70%', '100%'],
-        //         fixed: true,
-        //         maxmin: true,
-        //         content: 'teach-edit.html'
-        //     });
-        //     layer.full(index);
-        // });
+        form.on('switch', function () {
+            layer.load();
+            update(this.value, { publish: this.name === 'true' ? 0 : 1 }, function (res) {
+                layer.closeAll('loading');
+            });
+        });
+
+        table.on('edit(demo)', function (obj) {
+            layer.load();
+            update(obj.data.id, { sort: obj.value }, function (res) {
+                tableIns.reload();
+                layer.closeAll('loading');
+            });
+        });
 
         function create(imageId, callback) {
             var params = {
@@ -120,6 +125,7 @@
                 type: 'POST',
                 tokenFlag: true,
                 data: {
+                    type: base.bannerType,
                     image_id: imageId
                 },
                 success: function (res) {
@@ -127,6 +133,19 @@
                 }
             }
             base.getData(params);
+        }
+
+        function update(id, data, callback) {
+            var params = {
+                url: `/banners/${id}`,
+                type: 'PUT',
+                tokenFlag: true,
+                data: data,
+                success: function (res) {
+                    callback && callback(res.message)
+                }
+            }
+            base.getData(params)
         }
 
         function del(id, callback) {
