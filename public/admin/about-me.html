@@ -1,11 +1,10 @@
-<link rel="stylesheet" href="./lib//simditor-2.3.13/site/assets/styles/simditor.css">
-
 <div class="layui-main">
     <form class="layui-form layui-form-pane" action="javascript:;">
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">内容</label>
             <div class="layui-input-block">
-                <textarea id="editor" placeholder="Balabala" autofocus></textarea>
+                <div style="border: 1px solid #cccccc" id="toolbar"></div>
+                <div style="height: 70vh;border: 1px solid #cccccc" id="editor"></div>
             </div>
         </div>
 
@@ -15,11 +14,6 @@
     </form>
 </div>
 
-
-<script src="./lib/simditor-2.3.13/site/assets/scripts/module.js"></script>
-<script src="./lib/simditor-2.3.13/site/assets/scripts/hotkeys.js"></script>
-<script src="./lib/simditor-2.3.13/site/assets/scripts/uploader.js"></script>
-<script src="./lib/simditor-2.3.13/site/assets/scripts/simditor.js"></script>
 <script>
     var base = window.base;
     base.getLocalStorage('token') || (window.location.href = 'login.html');
@@ -31,23 +25,24 @@
             layedit = layui.layedit,
             upload = layui.upload;
 
-        var editor = new Simditor({
-            textarea: $('#editor'),
-            toolbar: ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', 'ol', 'ul', 'table', 'link', 'image', 'hr', 'indent', 'outdent', 'alignment'],
-            upload: {
-                url: base.g_restUrl + '/images',
-                params: {
-                    token: base.getLocalStorage('token')
-                }
+        var E = window.wangEditor
+        var editor = new E('#toolbar', '#editor')
+        editor.customConfig.uploadImgServer = base.g_restUrl + '/images'
+        editor.customConfig.uploadFileName = 'file'
+        editor.customConfig.uploadImgHeaders = { 'token': base.getLocalStorage('token') }
+        editor.customConfig.uploadImgHooks = {
+            customInsert: function (insertImg, result, editor) {
+                insertImg(result.data.url)
             }
-        });
+        }
+        editor.create()
 
         show(function (res) {
-            editor.setValue(res.content)
+            editor.txt.html(res.content)
         });
 
         form.on('submit(sure)', function () {
-            update(editor.getValue(), function (res) {
+            update(editor.txt.html(), function (res) {
                 layer.msg('编辑成功');
             });
         });
