@@ -233,16 +233,17 @@
 				var img = '';
 				for(var i = 0; i < video.length; i++) {
 					all += '<div class="modal">\
-                         <span data-id="1">关闭</span>\
+                         <span data-id="'+i+'">关闭</span>\
                          <video id="player_a0"  class="projekktor width" poster="' + video[i].image.url + '" width="640" height="385" controls>\
                  <source src="' + video[i].video.url + '" type="video/mp4" />\
                          </video>\
                          </div>'
+                 
 				}
 				for(var i = 0; i < video.length; i++) {
 					img += '<li class="sw-slide">\
                         <img src="' + video[i].image.url + '" alt="">\
-                        <img src="img/play.png" alt="" data-id="0"/>\
+                        <img src="img/play.png" alt="" data-id="'+i+'"/>\
                         </li>'
 				}
 
