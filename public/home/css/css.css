@@ -47,6 +47,7 @@ header a:hover {
     left: 0;
     top: 0.5rem;
     display: none;
+    z-index: 9999;
 }
 
 .yj li {
@@ -162,7 +163,7 @@ header img {
     color: #fff;
     height: 5.49rem;
     margin-bottom: 0.88rem;
-    background: url("../img/lecturer.jpg") top right/cover no-repeat;
+   /* background: url("../img/lecturer.jpg") top right/cover no-repeat;*/
 }
 
 .tutor h3 {
@@ -306,7 +307,7 @@ header img {
 
 /*关于我们*/
 .banner2 {
-    background: url("../img/abouUsBanner.jpg") top center/cover;
+   /* background: url("../img/abouUsBanner.jpg") top center/cover;*/
 }
 
 .banner6 h3,.banner2 h3, .banner3 h3, .banner4 h3, .banner5 h3 {
@@ -327,7 +328,7 @@ header img {
 
 .why {
     margin: 0.3rem auto 0 !important;
-    background: url("../img/aboutImg.jpg") top right/cover no-repeat;
+   /* background: url("../img/aboutImg.jpg") top right/cover no-repeat;*/
 }
 
 .question {
@@ -361,7 +362,7 @@ header img {
 }
 
 .banner3 {
-    background: url("../img/introBanner.jpg") top center/cover;
+   /* background: url("../img/introBanner.jpg") top center/cover;*/
 }
 
 .red {

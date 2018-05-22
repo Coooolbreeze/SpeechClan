@@ -55,7 +55,7 @@
         <p>成就一批单位高级岗位竞聘成功者，部门领导者</p>
     </div>
 </div>-->
-		<div class="tutor width">
+		<div class="tutor width" style="padding: 0.83rem 0 0 0rem;">
 			<!--<img src=""/>
 			<h3>
         十年、两百多城市、千余场演讲、
@@ -77,13 +77,13 @@
 	<script src="js/index.js"></script>
 <script type="text/javascript">
 	$.ajax({
-			url: "http://www.yanjiangbang.cn/api/banners？type=4",
+			url: "http://www.yanjiangbang.cn/api/banners?type=4",
 			success: function(res) {
 				var banner = res.data;
 				console.log(banner)
 				var html='';
 					for(var i = 0; i < banner.length; i++) {
-						html += '<img src="' +banner[i].image.url+ '"/><div class="width"><h3>帮有志者学会演讲<br>用演讲帮助有心人</h3><p>我们是好有爱的社群演讲帮</p></div>'
+						html += '<img style="width:100%;height:100%;margin:0 auto;"   src="' +banner[i].image.url+ '"/>'
 					}
 					$(".tutor").html(html);
 			}

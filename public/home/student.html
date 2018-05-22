@@ -74,7 +74,7 @@
 				</li>
 			</ul>
 			<div class="content">
-				<div class="modal">
+				<!--<div class="modal">
 					<span data-id="0">关闭</span>
 					<video id="player_a" class="projekktor width" poster="img/YJB.jpg" width="640" height="385" controls>
 						<source src="img/陈奕迅 - 红玫瑰_l0010mf18Sa_2_0 [mqms].mp4" type="video/mp4" />
@@ -85,7 +85,7 @@
 					<video id="player_a0" class="projekktor width" poster="img/.jpg" width="640" height="385" controls>
 						<source src="img/陈奕迅 - 红玫瑰_l0010mf18Sa_2_0 [mqms].mp4" type="video/mp4" />
 					</video>
-				</div>
+				</div>-->
 			</div>
 
 		</div>
@@ -114,12 +114,12 @@
 				for(var i = 0; i < video.length; i++) {
 					all += '<li class="v" style="width: 4.76rem;height: 2rem;overflow: hidden; position: relative;margin-top: 0.26rem;">\
                         <img style="height: 2rem;position: absolute;left: 0;top:0;" src="' + video[i].image.url + '" alt=""/>\
-                        <img src="img/play.png" alt="" data-id="0"/>\
+                        <img src="img/play.png" alt="" data-id="'+i+'"/>\
                         </li>'
 				}
 				for(var i = 0; i < video.length; i++) {
 					img += ' <div class="modal">\
-                        <span data-id="0">关闭</span>\
+                        <span data-id="'+i+'">关闭</span>\
                         <video id="player_a" class="projekktor width" poster="' + video[i].image.url + '" width="640" height="385" controls>\
                 <source src="' + video[i].video.url + '" type="video/mp4"/>\
                         </video>\

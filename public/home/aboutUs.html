@@ -65,56 +65,8 @@
 		<!-- <div style="margin:0 auto;">
         <div class="content"></div>
     </div> -->
-		<div class="title">
-			<h3>学演讲，你为什么一定要选择演讲帮？</h3>
-
-			<p>Why do you have to choose a speech?</p>
-
-		</div>
-		<div class="tutor width why"></div>
-		<div class="question">
-			<p>
-				<span>演讲帮</span>传统的演讲学习，多是培训公司组织实施，课程完成后，训练的过程就结束了。存在 两个致命的问题.
-			</p>
-
-			<p>
-				1.老师自己再牛，但不是专业心理师，没办法深层次帮学员释放内在的恐惧；
-			</p>
-
-			<p>
-				2.学员带着一堆技巧回去，缺乏实战的机会去应用，很快就忘了。“演讲如同游泳，怕下水，学 不会；不下水，学不会！”
-			</p>
-
-			<p>演讲帮的演讲培训，由心理师主讲的演说训练系统，以社群形式组织运行。课程现场的工作人 员都是前期受过训练的学长们，她们能够更贴心的为大家服务。培训结束后，为每一个学员提 供十次以上的演讲实战机会！并且，如果你有足够的志向和决心，演讲帮全程支持你成立自己 的社群部落！
-			</p>
-		</div>
-		<div class="title">
-			<div class="classIntro width aboutIntro ">
-				<div>
-					<img src="img/aboutImg1.jpg" alt="" />
-
-					<h2>演讲帮愿景 </h2>
-
-					<p>打通心灵的任督二脉，让你在台上自如绽放； 塑造你的强大感染力，让全场为你而动
-					</p>
-				</div>
-				<div>
-					<img src="img/aboutImg2.jpg" alt="" />
-
-					<h2>演讲帮使命 </h2>
-
-					<p>为你深度解读演讲力背后的玄机，分享任何其 它渠道都见不到的台上隐学。让你随时随地有 话讲让你说出见解独到的话，让你的话自带说
-					</p>
-				</div>
-				<div>
-					<img src="img/aboutImg3.jpg" alt="" />
-
-					<h2>核心价值观 </h2>
-
-					<p>核心定制：专人专教，因材施教 理念共享：以共同理念为标准 专注价值：一切以价值为本
-					</p>
-				</div>
-			</div>
+		<div class="title" style="padding-bottom: 50px;">
+			
 		</div>
 		<div class="foot_text">
 			皖ICP备18008044号-1     思维万有
@@ -125,7 +77,7 @@
 	<script src="js/index.js"></script>
 	<script>
 		getContent(function(res) {
-			$('.content').html(res.data.content)
+			$('.title').html(res.data.content)
 		})
 
 		function getContent(callback) {
@@ -139,13 +91,13 @@
 		}
 		
 		$.ajax({
-			url: "http://www.yanjiangbang.cn/api/banners？type=2",
+			url: "http://www.yanjiangbang.cn/api/banners?type=2",
 			success: function(res) {
 				var banner = res.data;
 				console.log(banner)
 				var html='';
 					for(var i = 0; i < banner.length; i++) {
-						html += '<img src="' +banner[i].image.url+ '"/><div class="width"><h3>帮有志者学会演讲<br>用演讲帮助有心人</h3><p>我们是好有爱的社群演讲帮</p></div>'
+						html += '<img src="' +banner[i].image.url+ '"/>'
 					}
 					$(".banner").html(html);
 			}
